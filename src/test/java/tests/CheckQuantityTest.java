@@ -16,7 +16,7 @@ public class CheckQuantityTest extends BaseTest{
 
 
 
-    @Test
+    @Test(priority= 3)
     public void checkQuantityOfProductSelectedTest() {
 
         driver.navigate().to("https://spree-vapasi.herokuapp.com");

@@ -12,7 +12,7 @@ public class BaseTest {
 
     ChromeDriver driver;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun= true)
     public void setup() {
 
         String currentUsersWorkingDir = System.getProperty("user.dir");
@@ -20,14 +20,14 @@ public class BaseTest {
         System.setProperty("webdriver.chrome.driver",currentUsersWorkingDir+"/src/test/resources/chromedriver");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        System.out.println("BeforeTest");
+        System.out.println("BeforeTest- tearDown");
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun= true)
     public void tearDown() {
         driver.close();
         driver.quit();
-        System.out.println("AfterTest");
+        System.out.println("AfterTest- tearDown");
 
     }
 

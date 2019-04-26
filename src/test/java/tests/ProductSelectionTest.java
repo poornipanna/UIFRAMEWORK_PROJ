@@ -3,15 +3,12 @@ package tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertTrue;
 
@@ -19,19 +16,10 @@ import static org.testng.Assert.assertTrue;
 public class ProductSelectionTest extends BaseTest {
 
 
-    @Test
-    public void AddProductToCartTest() {
+    @Test(priority = 2)
+    public void addProductToCartTest() {
 
-        driver.navigate().to("https://spree-vapasi.herokuapp.com");
-
-        driver.findElement(By.linkText("Bags")).click();
-
-        driver.findElement(By.linkText("Ruby on Rails Bag")).click();
-
-        driver.findElement(By.name("quantity")).clear();
-        driver.findElement(By.name("quantity")).sendKeys("3");
-
-        driver.findElement(By.id("add-to-cart-button")).click();
+        addProductToCart("https://spree-vapasi.herokuapp.com", "Bags" ,"Ruby on Rails Bag");
 
         List<WebElement> listOfItems = driver.findElement(By.id("cart-detail")).findElements(By.id("line_items"));
         int count= listOfItems.size();
@@ -39,7 +27,7 @@ public class ProductSelectionTest extends BaseTest {
        Iterator item = listOfItems.iterator();
 
 
-  /*     for(int i=0;i < count; i++)
+        /*for(int i=0;i < count; i++)
         {
             WebElement ele = listOfItems.get(i);
             String productText = ele.getText().split("\n")[0];
@@ -55,6 +43,18 @@ public class ProductSelectionTest extends BaseTest {
 
         }
 
+    }
+
+    private void addProductToCart(String url, String categoryName, String product) {
+
+        //https://spree-vapasi.herokuapp.com , Bags , Ruby on Rails Bag , add-to-cart-button
+        driver.navigate().to(url);
+
+        driver.findElement(By.linkText(categoryName)).click();
+
+        driver.findElement(By.linkText(product)).click();
+
+        driver.findElement(By.id("add-to-cart-button")).click();
     }
 
 
