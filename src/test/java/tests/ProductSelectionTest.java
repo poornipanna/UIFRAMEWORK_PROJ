@@ -1,6 +1,8 @@
 package tests;
 
 
+import Pages.ProductDetailsPage;
+import Pages.ProductListingPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -16,15 +18,18 @@ import static org.testng.Assert.assertTrue;
 public class ProductSelectionTest extends BaseTest {
 
 
-    @Test(priority = 2)
+    @Test
     public void addProductToCartTest() {
 
-        addProductToCart("https://spree-vapasi.herokuapp.com", "Bags" ,"Ruby on Rails Bag");
+        ProductListingPage productListingPage = new ProductListingPage(driver);
+
+        productListingPage.addProductToCart("https://spree-vapasi.herokuapp.com", "Bags" ,"Ruby on Rails Bag");
 
         List<WebElement> listOfItems = driver.findElement(By.id("cart-detail")).findElements(By.id("line_items"));
-        int count= listOfItems.size();
+        int count;
+        count = listOfItems.size();
 
-       Iterator item = listOfItems.iterator();
+        Iterator item = listOfItems.iterator();
 
 
         /*for(int i=0;i < count; i++)
@@ -45,18 +50,20 @@ public class ProductSelectionTest extends BaseTest {
 
     }
 
-    private void addProductToCart(String url, String categoryName, String product) {
+    @Test
+    void productExitsOrNotTest()
+    {
+        ProductDetailsPage productDetailsPage = new ProductDetailsPage(driver);
+        productDetailsPage.productDetails("https://spree-vapasi.herokuapp.com", "Ruby on Rails Bag");
 
-        //https://spree-vapasi.herokuapp.com , Bags , Ruby on Rails Bag , add-to-cart-button
-        driver.navigate().to(url);
-
-        driver.findElement(By.linkText(categoryName)).click();
-
-        driver.findElement(By.linkText(product)).click();
-
-        driver.findElement(By.id("add-to-cart-button")).click();
+        Assert.assertTrue( productDetailsPage.IsProductDisplayed("Ruby on Rails Bag"));
     }
 
+    @Test
+    void verifyAddToCartMatchesShoppingCart()
+    {
+        
+    }
 
     @AfterTest
     public void tearDown() {

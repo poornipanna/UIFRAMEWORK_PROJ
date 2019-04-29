@@ -13,14 +13,14 @@ public class BaseTest {
     ChromeDriver driver;
 
     @BeforeMethod(alwaysRun= true)
-    public void setup() {
+    public void setUp() {
 
         String currentUsersWorkingDir = System.getProperty("user.dir");
         System.out.println("Dir is " + currentUsersWorkingDir);
         System.setProperty("webdriver.chrome.driver",currentUsersWorkingDir+"/src/test/resources/chromedriver");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        System.out.println("BeforeTest- tearDown");
+        System.out.println("BeforeTest- setUp");
     }
 
     @AfterMethod(alwaysRun= true)
