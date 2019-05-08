@@ -1,0 +1,24 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="smokesuite" verbose="10" parallel="tests">
+    <test name="smoke">
+        <!--<groups>-->
+        <!--<run>-->
+        <!--<include name="smoke"/>-->
+        <!--</run>-->
+        <groups>
+            <run>
+<!--              <include name="smoke"/>&ndash;&gt;-->
+            </run>
+
+        </groups>
+        <classes>
+            <class name="tests.SimpleLoginTest" />
+            <class name="tests.ProductSelectionTest" />
+            <class name="tests.CheckQuantityTest" />
+
+        </classes>
+
+    </test>
+
+</suite>

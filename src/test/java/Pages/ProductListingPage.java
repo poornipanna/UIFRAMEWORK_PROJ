@@ -14,16 +14,19 @@ public class ProductListingPage {
 
     }
 
-    public void addProductToCart(String url, String categoryName, String product) {
-
-        //https://spree-vapasi.herokuapp.com , Bags , Ruby on Rails Bag , add-to-cart-button
-        driver.navigate().to(url);
-
+    public Pages.ProductDetailsPage
+    selectCategoryAndProduct(String categoryName, String product) {
         driver.findElement(By.linkText(categoryName)).click();
-
         driver.findElement(By.linkText(product)).click();
+        return new Pages.ProductDetailsPage(driver);
 
-        driver.findElement(By.id("add-to-cart-button")).click();
     }
+
+  /*  driver.findElement(By.id("add-to-cart-button")).click();
+
+        return new ShopingCartPage(driver);*/
+
+
+
 
 }

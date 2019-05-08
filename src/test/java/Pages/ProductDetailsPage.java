@@ -2,34 +2,35 @@ package Pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class ProductDetailsPage {
 
+    @FindBy(id="quantity")
+    private WebElement numQuantity;
+
+    @FindBy(id="add-to-cart-button")
+    private WebElement addToCartButton;
+
     WebDriver driver;
 
-    public ProductDetailsPage(WebDriver driver)
-    {
+    public ProductDetailsPage(WebDriver driver){
         this.driver = driver;
-
+        PageFactory.initElements(driver, this);
     }
 
-    public void productDetails(String url,  String product) {
-
-
-        //https://spree-vapasi.herokuapp.com , Bags , Ruby on Rails Bag , add-to-cart-button
-        driver.navigate().to(url);
-
-        driver.findElement(By.linkText(product)).click();
-
-    }
-
-    public boolean IsProductDisplayed(String product)
+    public ProductDetailsPage changeQuantity(String quantity)
     {
+        numQuantity.clear();
+        numQuantity.sendKeys(quantity);
+        return new ProductDetailsPage(driver);
+    }
 
-        boolean isDisplayed = driver.findElement(By.className(product)).isDisplayed();
-        if (isDisplayed)
-            return true;
-        else
-            return false;
+    public pages.ShoppingCartPage clickAddToCart()
+    {
+        addToCartButton.click();
+        return new pages.ShoppingCartPage(driver);
     }
 }
