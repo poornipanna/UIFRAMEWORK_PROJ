@@ -6,7 +6,7 @@ pipeline {
 
             steps {
                 withMaven(maven : 'maven_3_6_1') {
-                    sh 'mvn build'
+                    bat 'mvn build'
                 }
             }
 
@@ -15,7 +15,7 @@ pipeline {
         stage ('Testing stage') {
             steps {
                   withMaven(maven : 'maven_3_6_1')  {
-                  sh 'mvn test'
+                  bat 'mvn test'
                 }
 
              }
