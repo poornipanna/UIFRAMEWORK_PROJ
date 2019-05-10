@@ -1,12 +1,15 @@
 pipeline {
     agent any
+    tools{
+        maven 'maven_3_6_1'
+    }
 
     stages {
         stage ('compile stage'){
 
             steps {
-                withMaven(maven : 'maven_3.6.1') {
-                    bat "mvn clean compile"
+
+                    sh "mvn compile"
                 }
             }
 
@@ -14,12 +17,9 @@ pipeline {
 
         stage ('Testing stage') {
             steps {
-                  withMaven(maven : 'maven_3.6.1')  {
-                  bat "mvn test"
+
+                  sh "mvn test"
                 }
 
              }
-        }
-
     }
-}
